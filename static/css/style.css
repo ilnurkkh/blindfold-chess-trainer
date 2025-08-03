@@ -2,7 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    /* text-align: center; */
+    text-align: center;
     font-family: "Inter", sans-serif;
     list-style: none;
     text-decoration: none;
@@ -105,6 +105,17 @@ nav ul li {
     color: #fff;
     cursor: pointer;
     text-transform: uppercase;
+}
+
+.error {
+    color: maroon;
+    font-weight: 600;
+    font-size: 1.5rem;
+}
+
+.pgn {
+    background-color: rgba(0, 0, 0, 0.15);
+    margin: 1vw;
 }
 
 /* footer {
