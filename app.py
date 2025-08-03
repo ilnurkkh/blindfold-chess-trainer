@@ -13,7 +13,7 @@ def index():
     
         if request.method == 'POST':
             # Handle form submission here
-            move = chess.Move.from_uci(request.form.get('move'))
+            move = board.parse_san(request.form.get('move'))
             if move in board.legal_moves:
                 board.push(move)
                 return redirect('/')
