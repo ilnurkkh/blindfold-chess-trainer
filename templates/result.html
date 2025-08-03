@@ -37,7 +37,7 @@
         </div>
     </header>
 
-    <main class="flex-all-center">
+    <main class="playing_area">
         <div class="result">
             {% if result == "1-0" %}
                 <h2>WHITE WON!</h2>
@@ -46,6 +46,11 @@
             {% else %}
                 <h2>DRAW!</h2>
             {% endif %}
+        </div>
+        <div class="playing_area">
+            <form action="/" method="post">
+                <input type="submit" value="Play Again" class="btn" />
+            </form>
         </div>
     </main>
 

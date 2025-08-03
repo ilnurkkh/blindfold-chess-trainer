@@ -10,18 +10,23 @@ board = chess.Board()
 def index():
 
     while not board.is_game_over():
+
+        turn = "White" if board.turn == chess.WHITE else "Black"
     
         if request.method == 'POST':
-            # Handle form submission here
+            # Makes the move on the board
             move = board.parse_san(request.form.get('move'))
-            if move in board.legal_moves:
-                board.push(move)
-                return redirect('/')
-            else:
-                return redirect('/')
+            board.push(move)
+            return redirect('/')
             
-        return render_template('index.html')
+        return render_template('index.html', turn=turn)
     
+    # Restart game if it is over
+    if request.method == 'POST':
+        board.reset()
+        return render_template('index.html', turn="White")
+
+    # Game is over, render the result
     return render_template('result.html', result=board.result())
 
 if __name__ == '__main__':

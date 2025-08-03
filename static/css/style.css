@@ -88,6 +88,7 @@ nav ul li {
 .move_input {
     width: 50%;
     padding: 0.5rem;
+    margin: 2vh;
     font-size: 1.2rem;
     border: 2px solid purple;
     border-radius: 5px;
