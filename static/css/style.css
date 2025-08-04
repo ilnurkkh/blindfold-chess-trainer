@@ -77,7 +77,7 @@ nav ul li {
     align-items: center;
 }
 
-.playing_area form {
+.playing_area .main_area {
     width: 40%;
     display: flex;
     flex-direction: column;
@@ -101,7 +101,7 @@ nav ul li {
     padding: 15px;
     margin: 2vh;
     border-radius: 5px;
-    width: 25%;
+    width: 30%;
     color: #fff;
     cursor: pointer;
     text-transform: uppercase;
@@ -117,6 +117,24 @@ nav ul li {
     background-color: rgba(0, 0, 0, 0.15);
     margin: 1vw;
     max-width: 50vw;
+}
+
+.claim_draw {
+    width: 30%;
+}
+
+.controls {
+    display: flex;
+    flex-direction: row;
+}
+
+.controls input {
+    display: block;
+    /* width: 30%; */
+}
+
+.restart-btn {
+    width: 75%;
 }
 
 /* footer {

@@ -41,7 +41,7 @@
 
         <div class="playing_area">
             <h2 class="turn">It's {{ turn }}'s turn</h2>
-            <form action="/" method="post">
+            <form action="/" method="post" class="main_area">
                 <input type="text" name="move" placeholder="Enter your Move" required autocomplete="off" autofocus
                     class="move_input" />
                 <input type="submit" value="play" class="btn" />
@@ -53,6 +53,10 @@
             </div>
             <form action="/" class="claim_draw" method="post">
                 <input type="submit" value="Claim Draw" name="claim_draw" class="btn"/>
+            </form>
+            <form action="/" class="controls flex-all-center" method="post">
+                <input type="submit" value="&#x1F6A9;" class="btn" name="resign">
+                <input type="submit" value="&#x1F91D;" class="btn" name="agree_draw">
             </form>
         </div>
 

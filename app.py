@@ -31,6 +31,15 @@ def index():
                     return render_template('result.html', result='1/2-1/2', pgn=get_pgn_string())
                 else:
                     return render_template('index.html', turn=turn, error="Draw cannot be claimed now.")
+            
+            elif 'resign' in request.form: # If Resign button is pressed
+                game_over = True
+                result = '0-1' if board.turn == chess.WHITE else '1-0' # Determine result based on whose turn it is
+                return render_template('result.html', result=result, pgn=get_pgn_string())
+            
+            elif 'agree_draw' in request.form: # If Agree Draw button is pressed
+                game_over = True
+                return render_template('result.html', result='1/2-1/2', pgn=get_pgn_string())
     
             # Makes the move on the board
             try:
