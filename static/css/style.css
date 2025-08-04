@@ -85,6 +85,10 @@ nav ul li {
     align-items: center;
 }
 
+.replay{
+    margin-bottom: 5vh;
+}
+
 .move_input {
     width: 50%;
     padding: 0.5rem;
