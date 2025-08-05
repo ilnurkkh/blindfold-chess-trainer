@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, jsonify
 import chess
 import chess.pgn
 import random
@@ -133,7 +133,16 @@ def play_the_computer():
     
     return render_template('result1.html', result=board.result(), pgn=get_pgn_string())
 
+@app.route("/validate_move", methods=["POST"])
+def validate_move():
+    move_text = request.json.get("move", "").strip()
+    temp_board = board.copy()
 
+    try:
+        temp_board.parse_san(move_text)
+        return jsonify(valid=True)
+    except ValueError:
+        return jsonify(valid=False)
         
 if __name__ == '__main__':
     app.run(debug=True)

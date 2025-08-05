@@ -16,7 +16,7 @@
     </style>
     <link rel="icon" href="{{ url_for('static', filename='favicon_io/favicon.ico') }}" type="image/x-icon" />
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
-    <script src="{{ url_for('static', filename='js/script.js') }}" defer></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </head>
 
 <body>
@@ -43,8 +43,8 @@
             <h2 class="turn">It's {{ turn }}'s turn</h2>
             <form action="/" method="post" class="main_area">
                 <input type="text" name="move" placeholder="Enter your Move" required autocomplete="off" autofocus
-                    class="move_input" />
-                <input type="submit" value="play" class="btn" />
+                    class="move_input" id="moveInput" />
+                <input type="submit" value="play" class="btn"/>
             </form>
             <div class="error">
                 {% if error %}
