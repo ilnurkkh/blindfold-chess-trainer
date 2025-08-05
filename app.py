@@ -76,7 +76,7 @@ def index():
                 # If the move is invalid, render the same page with an error message
                 return render_template('index.html', turn=turn, error="Invalid move. Please try again.")
 
-        if request.args.get("from", None) == "compplay": # If visited from play against computer
+        if request.args.get("from", None) == "clear": # If visited from other pages, clear the game state
             board.reset()  # Reset the chess board
             return render_template('index.html', turn='White')
         
@@ -181,6 +181,11 @@ def validate_move():
         return jsonify(valid=True)
     except ValueError:
         return jsonify(valid=False)
+    
+@app.route('/history')
+def history():
+    games = Game.query.order_by(Game.date_played.desc()).all()
+    return render_template("history.html", games=games)
         
 if __name__ == '__main__':
     app.run(debug=True)

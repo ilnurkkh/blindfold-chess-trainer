@@ -16,7 +16,7 @@
     </style>
     <link rel="icon" href="{{ url_for('static', filename='favicon_io/favicon.ico') }}" type="image/x-icon" />
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
-    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/history.css') }}" />
 </head>
 
 <body>
@@ -27,8 +27,8 @@
         <nav class="flex-all-center">
             <ul class="flex-all-center">
                 <li><a href="/?from=clear" class="nav_items">Play Yourself</a></li>
-                <li><a href="#" class="nav_items active">Play the Computer</a></li>
-                <li><a href="/history" class="nav_items">History</a></li>
+                <li><a href="{{ url_for('choose_color') }}" class="nav_items">Play the computer</a></li>
+                <li><a href="#" class="nav_items active">History</a></li>
             </ul>
         </nav>
         <div class="user-info flex-all-center">
@@ -37,35 +37,26 @@
         </div>
     </header>
 
-    <main class="flex-all-center">
-
-        <div class="playing_area">
-            <h2 class="heading">
-                {% if compmove != None %}
-                Computer played <br> {{ compmove }}
-                {% endif %}
-
-            </h2>
-            <form action="/play_the_computer" method="post" class="main_area">
-                <input type="text" name="move" placeholder="Enter your Move" required autocomplete="off" autofocus
-                    class="move_input" id="moveInput"/>
-                <input type="submit" value="play" class="btn" />
-            </form>
-            <div class="error">
-                {% if error %}
-                    <p class="error_message">{{ error }}</p>
-                {% endif %}
-            </div>
-            <form action="/play_the_computer" class="claim_draw" method="post">
-                <input type="submit" value="Claim Draw" name="claim_draw" class="btn"/>
-            </form>
-            <form action="/play_the_computer" class="controls flex-all-center" method="post">
-                <input type="submit" value="&#x1F6A9;" class="btn" name="resign">
-                <!-- <input type="submit" value="&#x1F91D;" class="btn" name="agree_draw"> -->
-            </form>
-        </div>
-
-
+    <main class="playing_area">
+        <h2>Game History</h2>
+        <table border="1" cellpadding="5">
+            <tr>
+                <th>ID</th>
+                <th>Date</th>
+                <th>Mode</th>
+                <th>Result</th>
+                <th>PGN</th>
+            </tr>
+            {% for game in games %}
+            <tr>
+                <td>{{ game.id }}</td>
+                <td>{{ game.date_played.strftime("%Y-%m-%d %H:%M") }}</td>
+                <td>{{ game.mode }}</td>
+                <td>{{ game.result }}</td>
+                <td>{{ game.moves }}</td>
+            </tr>
+            {% endfor %}
+        </table>
     </main>
 
     <footer class="flex-all-center">
