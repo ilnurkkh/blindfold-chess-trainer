@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="A simple web application to train your blindfold chess skills." />
     <meta name="keywords" content="chess, blindfold chess, training, skills" />
-    <meta name="author" content="Blindfold Chess Trainer Team" />
+    <meta name="author" content="Ilnurkkh" />
 
     <title>Blindfold Chess Trainer</title>
 
@@ -16,6 +16,7 @@
     </style>
     <link rel="icon" href="{{ url_for('static', filename='favicon_io/favicon.ico') }}" type="image/x-icon" />
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/responsive.css') }}" />
 </head>
 
 <body>
@@ -27,13 +28,13 @@
             <ul class="flex-all-center">
                 <li><a href="/" class="nav_items">Play Yourself</a></li>
                 <li><a href="#" class="nav_items active">Play the Computer</a></li>
-                <li><a href="/history" class="nav_items">History</a></li>
+                <li><a href="/history" class="nav_items" id="history">History</a></li>
             </ul>
         </nav>
-        <div class="user-info flex-all-center">
-            <!-- <img src="{{ url_for('static', filename='images/user-icon.png') }}" alt="User Icon" class="user-icon" /> -->
+        <!-- <div class="user-info flex-all-center">
+            <img src="{{ url_for('static', filename='images/user-icon.png') }}" alt="User Icon" class="user-icon" />
             <span class="username">Abyss</span>
-        </div>
+        </div> -->
     </header>
 
     <main class="flex-all-center">

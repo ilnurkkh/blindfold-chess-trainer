@@ -1,0 +1,61 @@
+@media (max-width: 1300px) {
+    #claimDraw {
+        white-space: pre-line;
+    }
+
+    #claimDraw:before {
+        content: "Claim\nDraw";
+    }
+}
+
+@media (max-width: 845px) {
+    #claimDraw {
+        width: 50%;
+    }
+
+    #moveInput::placeholder {
+        color: White;
+    }
+}
+
+@media (max-width: 600px) {
+    #history {
+        display: none;
+    }
+}
+
+@media (max-width: 515px) {
+    header {
+        background: none;
+    }
+
+    #playBtn {
+        width: 75%;
+    }
+
+    #claimDraw {
+        width: 75%;
+    }
+
+    body {
+        background: rgb(163, 201, 105);
+    }
+
+    footer p{
+        display: none;
+    }
+}
+
+@media (max-width: 350px){
+    nav.flex-all-center {
+        display: none;
+    }
+
+    .logo {
+        display: none;
+    }
+
+    .claim_draw {
+        width: 80%;
+    }
+}

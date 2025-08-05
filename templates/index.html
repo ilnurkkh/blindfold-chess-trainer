@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="A simple web application to train your blindfold chess skills." />
     <meta name="keywords" content="chess, blindfold chess, training, skills" />
-    <meta name="author" content="Blindfold Chess Trainer Team" />
+    <meta name="author" content="Ilnurkkh" />
 
     <title>Blindfold Chess Trainer</title>
 
@@ -16,6 +16,7 @@
     </style>
     <link rel="icon" href="{{ url_for('static', filename='favicon_io/favicon.ico') }}" type="image/x-icon" />
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/responsive.css') }}" />
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </head>
 
@@ -30,13 +31,13 @@
                 <li>
                     <a href="{{ url_for('choose_color') }}" class="nav_items">Play the Computer</a>
                 </li>
-                <li><a href="/history" class="nav_items">History</a></li>
+                <li><a href="/history" class="nav_items" id="history">History</a></li>
             </ul>
         </nav>
-        <div class="user-info flex-all-center">
-            <!-- <img src="{{ url_for('static', filename='images/user-icon.png') }}" alt="User Icon" class="user-icon" /> -->
+        <!-- <div class="user-info flex-all-center">
+            <img src="{{ url_for('static', filename='images/user-icon.png') }}" alt="User Icon" class="user-icon" />
             <span class="username">Abyss</span>
-        </div>
+        </div> -->
     </header>
 
     <main class="flex-all-center">
@@ -45,7 +46,7 @@
             <form action="/" method="post" class="main_area">
                 <input type="text" name="move" placeholder="Enter your Move" required autocomplete="off" autofocus
                     class="move_input" id="moveInput" />
-                <input type="submit" value="play" class="btn"/>
+                <input type="submit" value="play" class="btn" id="playBtn"/>
             </form>
             <div class="error">
                 {% if error %}
@@ -53,7 +54,7 @@
                 {% endif %}
             </div>
             <form action="/" class="claim_draw" method="post">
-                <input type="submit" value="Claim Draw" name="claim_draw" class="btn" />
+                <input type="submit" value="Claim Draw" name="claim_draw" class="btn" id="claimDraw" />
             </form>
             <form action="/" class="controls flex-all-center" method="post">
                 <input type="submit" value="&#x1F6A9;" class="btn" name="resign" />
@@ -61,7 +62,7 @@
             </form> 
     </main>
 
-    <footer class="flex-all-center">
+    <footer class="flex-all-center"">
         <p>&copy; 2025 Blindfold Chess Trainer</p>
     </footer>
 </body>

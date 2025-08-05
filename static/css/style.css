@@ -32,11 +32,13 @@ header {
     display: flex;
     background-color: rgba(0, 0, 0, 0.1);
     padding: 2rem;
+    width: 100vw;
 }
 
 .logo {
     color: black;
     align-self: flex-start;
+    max-width: 33vw;
 }
 
 nav {
@@ -46,12 +48,13 @@ nav {
 nav ul li {
     padding : 0 5vw;
     font-size: 1.2rem;
+    max-width: 33vw;
 }
 
-.user-info {
+/* .user-info {
     margin-left: auto;
     font-size: 1.1rem;
-}
+} */
 
 .nav_items {
     color: white;
