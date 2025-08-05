@@ -12,7 +12,7 @@
     <title>Blindfold Chess Trainer</title>
 
     <style>
-        @import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+        @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
     </style>
     <link rel="icon" href="{{ url_for('static', filename='favicon_io/favicon.ico') }}" type="image/x-icon" />
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
@@ -26,10 +26,8 @@
         </div>
         <nav class="flex-all-center">
             <ul class="flex-all-center">
-                <li><a href="#" class="nav_items active">Play Yourself</a></li>
-                <li>
-                    <a href="{{ url_for('choose_color') }}" class="nav_items">Play the Computer</a>
-                </li>
+                <li><a href="#" class="nav_items">Play Yourself</a></li>
+                <li><a href="{{ url_for('choose_color') }}" class="nav_items active">Play the Computer</a></li>
             </ul>
         </nav>
         <div class="user-info flex-all-center">
@@ -39,26 +37,16 @@
     </header>
 
     <main class="flex-all-center">
+
         <div class="playing_area">
-            <h2 class="turn">It's {{ turn }}'s turn</h2>
-            <form action="/" method="post" class="main_area">
-                <input type="text" name="move" placeholder="Enter your Move" required autocomplete="off" autofocus
-                    class="move_input" />
-                <input type="submit" value="play" class="btn" />
-            </form>
-            <div class="error">
-                {% if error %}
-                <p class="error_message">{{ error }}</p>
-                {% endif %}
-            </div>
-            <form action="/" class="claim_draw" method="post">
-                <input type="submit" value="Claim Draw" name="claim_draw" class="btn" />
-            </form>
-            <form action="/" class="controls flex-all-center" method="post">
-                <input type="submit" value="&#x1F6A9;" class="btn" name="resign" />
-                <input type="submit" value="&#x1F91D;" class="btn" name="agree_draw" />
+            <h1>Choose your Color:</h1>
+            <form action="/play_the_computer" class="flex-all-center" method="post">
+                <input type="submit" value="WHITE" class="btn color_btn" name="white">
+                <input type="submit" value="BLACK" class="btn color_btn" name="black">
             </form>
         </div>
+
+
     </main>
 
     <footer class="flex-all-center">

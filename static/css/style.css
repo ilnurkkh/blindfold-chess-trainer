@@ -134,12 +134,17 @@ nav ul li {
 
 .controls input {
     display: block;
+    width: 60%;
     /* width: 30%; */
 }
 
 .restart-btn {
     width: 75%;
     font-size: 1.5rem;
+}
+
+.color_btn {
+    width: 45%;
 }
 
 /* footer {

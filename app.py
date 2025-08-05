@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, redirect
 import chess
 import chess.pgn
+import random
 
 app = Flask(__name__)
 app.config['TEMPLATES_AUTO_RELOAD'] = True # Reloads server everytime code is changed
@@ -64,5 +65,56 @@ def index():
     game_over = True
     return render_template('result.html', result=board.result(), pgn=get_pgn_string())
 
+
+@app.route('/choose_color')
+def choose_color():
+
+    global game_over
+    game_over = False  # Reset game state when choosing color
+    board.reset()  # Reset the chess board
+
+    return render_template('color.html')
+    
+
+@app.route('/play_the_computer', methods=['GET', 'POST'])
+def play_the_computer():
+    
+    global game_over
+
+    comp_white = None
+
+    while not game_over:
+
+        if request.method == 'POST':
+
+            if 'white' in request.form:
+                return render_template('comp.html', compmove=None)
+            elif 'black' in request.form:
+                move = random.choice(list(board.legal_moves))
+                compmove_san = board.san(move)  # get SAN before pushing
+                board.push(move)
+                return render_template('comp.html', compmove=compmove_san)
+            
+            try:
+                move = board.parse_san(request.form.get('move'))
+                board.push(move)
+                game_over = board.is_game_over()
+                return redirect('/play_the_computer')
+            except ValueError:
+                return render_template('comp.html', error="Invalid move. Please try again.")
+            
+        move = random.choice(list(board.legal_moves))
+        move_san = board.san(move)
+        board.push(move)
+        game_over = board.is_game_over()
+        if not game_over:
+            return render_template('comp.html', compmove=move_san)
+        else:
+            return render_template('result.html', result=board.result(), pgn=get_pgn_string())
+    
+    return render_template('result.html', result=board.result(), pgn=get_pgn_string())
+
+
+        
 if __name__ == '__main__':
     app.run(debug=True)
