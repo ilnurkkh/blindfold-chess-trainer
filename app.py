@@ -1,10 +1,20 @@
 from flask import Flask, render_template, request, redirect, jsonify
+from models import db, Game
 import chess
 import chess.pgn
 import random
 
 app = Flask(__name__)
-app.config['TEMPLATES_AUTO_RELOAD'] = True # Reloads server everytime code is changed
+app.config['TEMPLATES_AUTO_RELOAD'] = True # Reloads server everytime code is 
+app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///games.db"
+app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+
+# Connect db to this Flask app
+db.init_app(app)
+
+# Create database tables if not exist
+with app.app_context():
+    db.create_all()
 
 board = chess.Board()
 
@@ -29,18 +39,32 @@ def index():
             if 'claim_draw' in request.form: # If Claim Draw button is pressed
                 if board.can_claim_fifty_moves() or board.can_claim_threefold_repetition(): # Check if draw can be claimed
                     game_over = True
-                    return render_template('result.html', result='1/2-1/2', pgn=get_pgn_string())
+                    pgn = get_pgn_string()
+                    result = '1/2-1/2'  # Draw result
+                    new_game = Game(mode="self", moves=pgn, result=result)
+                    db.session.add(new_game)
+                    db.session.commit()
+                    return render_template('result.html', result=result, pgn=pgn)
                 else:
                     return render_template('index.html', turn=turn, error="Draw cannot be claimed now.")
             
             elif 'resign' in request.form: # If Resign button is pressed
                 game_over = True
                 result = '0-1' if board.turn == chess.WHITE else '1-0' # Determine result based on whose turn it is
-                return render_template('result.html', result=result, pgn=get_pgn_string())
+                pgn = get_pgn_string()
+                new_game = Game(mode="self", moves=pgn, result=result)
+                db.session.add(new_game)
+                db.session.commit()
+                return render_template('result.html', result=result, pgn=pgn)
             
             elif 'agree_draw' in request.form: # If Agree Draw button is pressed
                 game_over = True
-                return render_template('result.html', result='1/2-1/2', pgn=get_pgn_string())
+                pgn = get_pgn_string()
+                result = '1/2-1/2'  # Draw result
+                new_game = Game(mode="self", moves=pgn, result=result)
+                db.session.add(new_game)
+                db.session.commit()
+                return render_template('result.html', result='1/2-1/2', pgn=pgn)
     
             # Makes the move on the board
             try:
@@ -70,7 +94,12 @@ def index():
         return render_template('index.html', turn="White")
     else:
         game_over = True
-        return render_template('result.html', result=board.result(), pgn=get_pgn_string())
+        pgn = get_pgn_string()
+        result = board.result()
+        new_game = Game(mode="self", moves=pgn, result=result)
+        db.session.add(new_game)
+        db.session.commit()
+        return render_template('result.html', result=result, pgn=pgn)
 
 
 @app.route('/choose_color', methods=['GET', 'POST'])
@@ -97,14 +126,23 @@ def play_the_computer():
             if 'claim_draw' in request.form: # If Claim Draw button is pressed
                 if board.can_claim_fifty_moves() or board.can_claim_threefold_repetition(): # Check if draw can be claimed
                     game_over = True
-                    return render_template('result1.html', result='1/2-1/2', pgn=get_pgn_string())
+                    pgn = get_pgn_string()
+                    result = '1/2-1/2'  # Draw result
+                    new_game = Game(mode="computer", moves=pgn, result=result)
+                    db.session.add(new_game)
+                    db.session.commit()
+                    return render_template('result1.html', result=result, pgn=pgn)
                 else:
                     return render_template('comp.html', error="Draw cannot be claimed now.")
             
             elif 'resign' in request.form: # If Resign button is pressed
                 game_over = True
                 result = '0-1' if board.turn == chess.WHITE else '1-0' # Determine result based on whose turn it is
-                return render_template('result1.html', result=result, pgn=get_pgn_string())
+                pgn = get_pgn_string()
+                new_game = Game(mode="computer", moves=pgn, result=result)
+                db.session.add(new_game)
+                db.session.commit()
+                return render_template('result1.html', result=result, pgn=pgn)
 
             elif 'white' in request.form:
                 return render_template('comp.html', compmove=None)
