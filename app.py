@@ -52,8 +52,10 @@ def index():
                 # If the move is invalid, render the same page with an error message
                 return render_template('index.html', turn=turn, error="Invalid move. Please try again.")
 
-        # Starts Game  
-        board.reset()  # Reset the chess board
+        if request.args.get("from", None) == "compplay": # If visited from play against computer
+            board.reset()  # Reset the chess board
+            return render_template('index.html', turn='White')
+        
         return render_template('index.html', turn=turn)
     
     # Restart game if it is over

@@ -16,7 +16,7 @@
     </style>
     <link rel="icon" href="{{ url_for('static', filename='favicon_io/favicon.ico') }}" type="image/x-icon" />
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
-    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}" defer></script>
 </head>
 
 <body>
@@ -57,8 +57,7 @@
             <form action="/" class="controls flex-all-center" method="post">
                 <input type="submit" value="&#x1F6A9;" class="btn" name="resign" />
                 <input type="submit" value="&#x1F91D;" class="btn" name="agree_draw" />
-            </form>
-        </div>
+            </form> 
     </main>
 
     <footer class="flex-all-center">
