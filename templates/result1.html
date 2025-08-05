@@ -26,8 +26,8 @@
         </div>
         <nav class="flex-all-center">
             <ul class="flex-all-center">
-                <li><a href="#" class="nav_items active">Play Yourself</a></li>
-                <li><a href="{{ url_for('choose_color') }}" class="nav_items">Play the computer</a></li>
+                <li><a href="/" class="nav_items">Play Yourself</a></li>
+                <li><a href="#" class="nav_items active">Play the Computer</a></li>
             </ul>
         </nav>
         <div class="user-info flex-all-center">
@@ -47,7 +47,7 @@
             {% endif %}
         </div>
         <div class="playing_area replay">
-            <form action="/" method="post">
+            <form action="/choose_color" method="post">
                 <input type="submit" value="&#x21BB;" class="restart-btn btn" />
             </form>
         </div>
