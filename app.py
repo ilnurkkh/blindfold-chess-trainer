@@ -63,8 +63,12 @@ def index():
         return render_template('index.html', turn="White")
 
     # Game is over, render the result
-    game_over = True
-    return render_template('result.html', result=board.result(), pgn=get_pgn_string())
+    from_page = request.args.get("from", None)  # read ?from=...
+    if from_page == "compresult":
+        return render_template('index.html', turn="White")
+    else:
+        game_over = True
+        return render_template('result.html', result=board.result(), pgn=get_pgn_string())
 
 
 @app.route('/choose_color', methods=['GET', 'POST'])
