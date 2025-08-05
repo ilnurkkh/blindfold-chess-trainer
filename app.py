@@ -53,6 +53,7 @@ def index():
                 return render_template('index.html', turn=turn, error="Invalid move. Please try again.")
 
         # Starts Game  
+        board.reset()  # Reset the chess board
         return render_template('index.html', turn=turn)
     
     # Restart game if it is over
@@ -66,7 +67,7 @@ def index():
     return render_template('result.html', result=board.result(), pgn=get_pgn_string())
 
 
-@app.route('/choose_color')
+@app.route('/choose_color', methods=['GET', 'POST'])
 def choose_color():
 
     global game_over
@@ -87,7 +88,19 @@ def play_the_computer():
 
         if request.method == 'POST':
 
-            if 'white' in request.form:
+            if 'claim_draw' in request.form: # If Claim Draw button is pressed
+                if board.can_claim_fifty_moves() or board.can_claim_threefold_repetition(): # Check if draw can be claimed
+                    game_over = True
+                    return render_template('result1.html', result='1/2-1/2', pgn=get_pgn_string())
+                else:
+                    return render_template('comp.html', error="Draw cannot be claimed now.")
+            
+            elif 'resign' in request.form: # If Resign button is pressed
+                game_over = True
+                result = '0-1' if board.turn == chess.WHITE else '1-0' # Determine result based on whose turn it is
+                return render_template('result1.html', result=result, pgn=get_pgn_string())
+
+            elif 'white' in request.form:
                 return render_template('comp.html', compmove=None)
             elif 'black' in request.form:
                 move = random.choice(list(board.legal_moves))
@@ -112,7 +125,7 @@ def play_the_computer():
         else:
             return render_template('result.html', result=board.result(), pgn=get_pgn_string())
     
-    return render_template('result.html', result=board.result(), pgn=get_pgn_string())
+    return render_template('result1.html', result=board.result(), pgn=get_pgn_string())
 
 
         
