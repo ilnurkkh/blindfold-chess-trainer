@@ -1,5 +1,5 @@
-# blindfold-chess-trainer
-#### Video Demo:  <URL HERE>
+# Blindfold Chess Trainer
+#### Video Demo:  <https://youtu.be/CcJ2lc5Ln2w>
 #### Description:
 A web-app based blindfold chess trainer built for Harvard’s CS50 final project. Designed to help players practice and improve their visualization and memory by playing chess without a visible board.
 Blindfold chess is not any new invention. It is quite a common thing in the chess world where chess masters, demonstrate their skills by playing their opponent blindfold without an actual board or anything to look at and they still win. Great chess players can visualise entire games in their head and visualisation is a crucial skill that every chess player has to train.
