@@ -90,7 +90,7 @@ def index():
 
     # Game is over, render the result
     from_page = request.args.get("from", None)  # read ?from=...
-    if from_page == "compresult":
+    if from_page == "clear":
         return render_template('index.html', turn="White")
     else:
         game_over = True
