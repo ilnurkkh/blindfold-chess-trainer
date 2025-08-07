@@ -53,3 +53,7 @@ At first, I thought I'd use some CSS framework like Bootstrap or Tailwind, so I 
 This file ties together the backend logic, database operations, and user interface, making it the core of the Blindfold Chess Trainer application.
 
 - `models.py` Contains the database models for the project. These models define how data is stored, including the tables, columns, and relationships, and provide an easy way to interact with the database from the code. Uses SQLAlchemy to handle SQL queries for the database. All the finished games are stored in `games.db`.
+
+## License
+This project is not open source. All rights reserved.
+Unauthorized use, distribution, or modification is prohibited.
